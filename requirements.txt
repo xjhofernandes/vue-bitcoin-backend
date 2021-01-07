@@ -1,0 +1,5 @@
+mongoengine==0.22.1
+dnspython==2.0.0
+fastapi==0.61.2
+uvicorn==0.12.2
+pydantic==1.7.2
