@@ -1,6 +1,9 @@
 from mongoengine import *
 import requests
 from datetime import datetime
+import os
+
+MONGODB_URL = os.getenv('MONGODB_URL')
 
 class BitcoinValues(Document):
     date = DateTimeField(default=datetime.utcnow)
@@ -36,5 +39,5 @@ def update_bitcoin_value(event, context):
     data = r.json()
     doc = BitcoinValues(**data)
     
-    connect('bitcoin', host=f"mongodb+srv://admin:bitadmin@cluster0.oyaw3.mongodb.net/bitcoin?retryWrites=true&w=majority")
+    connect('bitcoin', host=MONGODB_URL)
     doc.save()
