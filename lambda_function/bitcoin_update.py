@@ -16,23 +16,6 @@ class BitcoinValues(Document):
     amount = FloatField(default=0)
     avg_price = FloatField(default=0)
 
-    def to_json(self):
-        return {
-            "date" : self.date,
-            "opening" : self.opening,
-            "closing" : self.closing,
-            "lowest" : self.lowest,
-            "highest" : self.highest,
-            "volume" : self.volume,
-            "quantity" : self.quantity,
-            "amount" : self.amount,
-            "avg_price" : self.avg_price,
-        }
-    
-    meta = {
-        "indexes" : ["date"]
-    }
-
 def update_bitcoin_value(event, context):
     today = datetime.now()
     r = requests.get(f'https://www.mercadobitcoin.net/api/BTC/day-summary/{today.year}/{today.month}/{today.day - 1}')
@@ -41,3 +24,5 @@ def update_bitcoin_value(event, context):
     
     connect('bitcoin', host=MONGODB_URL)
     doc.save()
+    
+    return "Success! ;)"
