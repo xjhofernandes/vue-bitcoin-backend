@@ -13,10 +13,7 @@ class BitcoinService(object):
     def period_filter(self, period_start):
         start = date.today() - period_start.value
         end = date.today()
-        print(start)
-        print(end)
         results = self.filter_date_interval(start, end)
-        print(results)
         return results.to_json()        
 
     def calendar_filter(self, start, end):
